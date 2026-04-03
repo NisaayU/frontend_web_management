@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
 
-const BASE_URL = "http://localhost:3000/api/v1/";
+const BASE_URL = "https://afcaa306-8731-44cf-9818-91461b831ea0-00-b0ch5nd4x1em.sisko.replit.dev/api/v1/";
 
 axios.defaults.headers.common["Content-Type"] = "application/json";
 
