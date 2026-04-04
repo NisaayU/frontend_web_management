@@ -15,7 +15,7 @@ export const menuItems = [
     },
     {
         id: 3,
-        title: "Pemasukan",
+        title: "Penjualan",
         icon: trend,
         path: "/income"
     },
@@ -27,7 +27,7 @@ export const menuItems = [
     }, 
     {
         id: 5,
-        title: "Tambah Barang",
+        title: "Kelola Barang",
         icon: add,
         path: "/input-item"
     },

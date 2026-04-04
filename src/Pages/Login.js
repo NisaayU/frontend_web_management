@@ -37,7 +37,7 @@ function Login() {
         <LoginStyled>
             <div className="login-card">
                 <div className="login-header">
-                    <h1>SAMPLING</h1>
+                    <h1>Toko Berkah Gypsum</h1>
                     <p>Sistem Manajemen Stok & Penjualan</p>
                 </div>
 

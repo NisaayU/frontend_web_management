@@ -153,13 +153,13 @@ function Dashboard() {
                     <EmptyState>
                         <span>🗒️</span>
                         <p>Belum ada transaksi hari ini.</p>
-                        <small>Tambahkan pemasukan atau pengeluaran untuk mulai merekap.</small>
+                        <small>Tambahkan data baru untuk mulai merekap.</small>
                     </EmptyState>
                 ) : (
                     <CardGrid cols={3}>
                         <StatCard color="purple">
                             <div className="card-body">
-                                <span className="card-label">Pemasukan</span>
+                                <span className="card-label">Penjualan</span>
                                 <span className="card-value">{formatRupiah(todayIncome)}</span>
                                 <span className="card-sub">{todayIncomes.length} transaksi masuk</span>
                             </div>

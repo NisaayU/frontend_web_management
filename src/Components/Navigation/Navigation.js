@@ -273,7 +273,7 @@ const NavStyled = styled.nav`
         }
 
         .bottom-nav {
-            .divider { display: none; }
+            display: none;
             .signout-btn {
                 flex-direction: column;
                 gap: .15rem;

@@ -73,7 +73,7 @@ function Chart() {
     labels,
     datasets: [
       {
-        label: "Pemasukan",
+        label: "Penjualan",
         data: incomes.map(({ total }) => total),
         borderColor: "#10b981",
         backgroundColor: (ctx) => {
@@ -220,7 +220,7 @@ function Chart() {
       <LegendRow>
         <LegendItem>
           <DotIcon color="#10b981" />
-          <span>Pemasukan</span>
+          <span>Penjualan</span>
           <LegendLine color="#10b981" />
         </LegendItem>
         <LegendItem>
