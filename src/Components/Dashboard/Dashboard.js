@@ -95,7 +95,7 @@ function Dashboard() {
     const yearlyBalance = yearlyIncome - yearlyExpense;
     const yearlyTxCount = yearlyIncomes.length + yearlyExpenses.length;
 
-    // ── MIN / MAX (per-hari bukan per-transaksi) ──
+    // ── MIN / MAX ──
     const aggregateByDate = (items, valueKey) => {
         const map = {};
         items.forEach(item => {
@@ -264,7 +264,6 @@ function Dashboard() {
                         <div className="section-box">
                             <h3 className="box-title">Grafik Transaksi</h3>
                             <Chart />
-                            {/* MIN MAX inside chart box */}
                             <div className="minmax-row">
                                 <div className="minmax-card">
                                     <span className="mm-label">Min Pemasukan</span>
@@ -313,7 +312,6 @@ const fadeUp = keyframes`
   to   { opacity: 1; transform: translateY(0); }
 `;
 
-/* ─── STYLED COMPONENTS ─── */
 const SectionLabel = styled.div`
     font-size: .78rem;
     font-weight: 800;

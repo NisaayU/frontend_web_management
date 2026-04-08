@@ -128,7 +128,7 @@ function Chart() {
       intersect: false,
     },
     plugins: {
-      legend: { display: false }, // custom legend below
+      legend: { display: false }, 
       tooltip: {
         backgroundColor: "#0f172a",
         titleColor: "rgba(255,255,255,0.55)",

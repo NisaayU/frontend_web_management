@@ -23,7 +23,6 @@ function Income() {
                     <div className="incomes">
                         {incomes.map((income) => {
                             const { _id, title, items, total, date, description, type } = income;
-                            // render income item di sini jika ada komponen-nya
                         })}
                     </div>
                 </div>

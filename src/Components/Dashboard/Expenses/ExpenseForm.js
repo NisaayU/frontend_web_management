@@ -17,7 +17,7 @@ function ExpenseForm() {
         description: '',
     });
 
-    const [toast, setToast] = useState(null); // { type: 'success' | 'error', msg: string }
+    const [toast, setToast] = useState(null); 
 
     const showToast = (type, msg) => {
         setToast({ type, msg });

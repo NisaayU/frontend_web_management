@@ -285,7 +285,7 @@ export const GlobalProvider = ({ children }) => {
                 getExpenses,
                 expenses,
                 deleteExpense,
-                updateExpense,      // ← tambahan baru
+                updateExpense,   
                 totalExpenses,
 
                 totalBalance,

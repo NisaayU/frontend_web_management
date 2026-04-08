@@ -371,7 +371,6 @@ function ViewData() {
                 </ModalOverlay>
             )}
 
-            {/* ── MODAL EDIT INCOME (hanya staff) ── */}
             {isStaff && editingIncome && (
                 <ModalOverlay onClick={e => { if (e.target === e.currentTarget) setEditingIncome(null); }}>
                     <ModalBox>
@@ -428,7 +427,6 @@ function ViewData() {
                 </ModalOverlay>
             )}
 
-            {/* ── MODAL EDIT EXPENSE (hanya staff) ── */}
             {isStaff && editingExpense && (
                 <ModalOverlay onClick={e => { if (e.target === e.currentTarget) setEditingExpense(null); }}>
                     <ModalBox className="narrow">
@@ -478,8 +476,6 @@ function ViewData() {
         </ViewDataStyled>
     );
 }
-
-/* ────────────────── STYLES ────────────────── */
 
 const ViewDataStyled = styled.div`
     width: 100%;

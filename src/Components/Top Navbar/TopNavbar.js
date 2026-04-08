@@ -9,7 +9,7 @@ const PAGE_TITLES = {
     "/income":       "Pemasukan",
     "/expenses":     "Pengeluaran",
     "/view-data":    "Lihat Transaksi",
-    "/input-item":   "Master Item",
+    "/input-item":   "Data Barang",
     "/profile":      "Profil",
     "/manage-users": "Kelola Pengguna",
 };
@@ -19,7 +19,7 @@ function TopNavbar() {
     const location = useLocation();
     const [open, setOpen] = useState(false);
     const [profileOpen, setProfileOpen] = useState(false);
-    const [readCount, setReadCount] = useState(0); // jumlah notif yang sudah dibaca
+    const [readCount, setReadCount] = useState(0); 
     const bellRef    = useRef(null);
     const profileRef = useRef(null);
 
@@ -57,23 +57,20 @@ function TopNavbar() {
     }, [items, incomes, expenses]);
 
     const totalCount = notifications.length;
-    // Badge hanya muncul kalau ada notif baru yang belum dibaca
     const unreadCount = Math.max(0, totalCount - readCount);
 
-    // Saat dropdown dibuka → tandai semua sudah dibaca
+    
     const handleBellClick = () => {
         const willOpen = !open;
         setOpen(willOpen);
         setProfileOpen(false);
         if (willOpen) {
-            setReadCount(totalCount); // semua sudah "dibaca"
+            setReadCount(totalCount); 
         }
     };
 
-    // Reset readCount kalau notifikasi baru muncul (misal stok baru habis)
     useEffect(() => {
         if (totalCount > readCount) {
-            // ada notif baru, biarkan badge muncul
         }
     }, [totalCount]);
 

@@ -276,7 +276,6 @@ function InputItem() {
 
 export default InputItem;
 
-/* ─────────────────── STYLED COMPONENTS ─────────────────── */
 
 const Wrapper = styled.div`
     display: grid;

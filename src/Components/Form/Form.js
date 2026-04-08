@@ -111,8 +111,8 @@ function Form() {
             description,
             type: 'income',
             items: items.map(i => ({
-                item:     i.item,             // ObjectId dari itemsMaster._id
-                quantity: Number(i.quantity), // konversi string → Number
+                item:     i.item,             
+                quantity: Number(i.quantity), 
             })),
         };
 
@@ -120,7 +120,6 @@ function Form() {
         setSubmitting(false);
 
         if (result?.success === false) {
-            // Tampilkan pesan error dari backend (misal: stok tidak cukup)
             setErrors({ server: result.message });
             return;
         }
@@ -206,7 +205,7 @@ function Form() {
                             {errors[`item_${index}_product`] && (
                                 <span className="error">{errors[`item_${index}_product`]}</span>
                             )}
-                            {/* Tampilkan sisa stok sebagai hint */}
+                            {/* Tampilkan sisa stok */}
                             {item.item && (() => {
                                 const master = itemsMaster.find(m => m._id === item.item);
                                 return master

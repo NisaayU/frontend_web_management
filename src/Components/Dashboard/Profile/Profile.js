@@ -10,7 +10,6 @@ function Profile() {
         getProfile();
     }, []);
 
-    // Gabungkan data dari user (localStorage) dan profile (API)
     const displayUser = profile || user;
 
     if (!displayUser) return <p style={{ padding: "2rem" }}>Loading...</p>;

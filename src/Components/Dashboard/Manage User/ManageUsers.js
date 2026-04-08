@@ -283,8 +283,6 @@ function ManageUsers() {
 
 export default ManageUsers;
 
-/* ─────────────── STYLED ─────────────── */
-
 const Wrapper = styled.div`
     padding: 1.5rem;
     width: 100%;

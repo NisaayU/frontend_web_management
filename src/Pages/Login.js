@@ -38,7 +38,7 @@ function Login() {
             <div className="login-card">
                 <div className="login-header">
                     <h1>Toko Berkah Gypsum</h1>
-                    <p>Sistem Manajemen Stok & Penjualan</p>
+                    <p>Sistem Pengelolaan Data Penjualan </p>
                 </div>
 
                 {error && <div className="error-msg">⚠️ {error}</div>}
