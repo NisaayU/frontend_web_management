@@ -7,12 +7,14 @@ import { dateFormat } from '../../../utils/dateFormat';
 const BASE_URL = 'https://afcaa306-8731-44cf-9818-91461b831ea0-00-b0ch5nd4x1em.sisko.replit.dev/api/v1/';
 
 function ViewData() {
-    const { transactionHistory, updateIncome, deleteIncome, deleteExpense, updateExpense, items: itemMaster, getItems } = useGlobalContext();
+    const { transactionHistory, updateIncome, deleteIncome, deleteExpense, updateExpense, items: itemMaster, getItems, user } = useGlobalContext();
 
     const [...history] = transactionHistory();
     useEffect(() => { getItems(); }, []);
     const incomeData  = history.filter(item => item.type === 'income');
     const expenseData = history.filter(item => item.type === 'expense');
+
+    const isStaff = user?.role === 'staff';
 
     const formatRupiah = (num) =>
         new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(num || 0);
@@ -252,12 +254,13 @@ function ViewData() {
                             <thead>
                                 <tr>
                                     <th>Tanggal</th><th>Pembeli</th><th>Barang</th>
-                                    <th className="right">Total</th><th className="center">Aksi</th>
+                                    <th className="right">Total</th>
+                                    {isStaff && <th className="center">Aksi</th>}
                                 </tr>
                             </thead>
                             <tbody>
                                 {filteredIncome.length === 0 ? (
-                                    <tr><td colSpan="5" className="empty-row">
+                                    <tr><td colSpan={isStaff ? 5 : 4} className="empty-row">
                                         <div className="empty-state"><span>📭</span><p>Belum ada data</p></div>
                                     </td></tr>
                                 ) : filteredIncome.map(income => {
@@ -279,12 +282,14 @@ function ViewData() {
                                                 ) : '—'}
                                             </td>
                                             <td className="right"><span className="amount income">+{formatRupiah(total)}</span></td>
-                                            <td className="center">
-                                                <div className="action-group">
-                                                    <button className="btn-edit"   onClick={() => handleEditIncome(income)}>✏️</button>
-                                                    <button className="btn-delete" onClick={() => handleDeleteClick(_id, 'income', title || 'transaksi ini')}>🗑️</button>
-                                                </div>
-                                            </td>
+                                            {isStaff && (
+                                                <td className="center">
+                                                    <div className="action-group">
+                                                        <button className="btn-edit"   onClick={() => handleEditIncome(income)}>✏️</button>
+                                                        <button className="btn-delete" onClick={() => handleDeleteClick(_id, 'income', title || 'transaksi ini')}>🗑️</button>
+                                                    </div>
+                                                </td>
+                                            )}
                                         </tr>
                                     );
                                 })}
@@ -304,12 +309,13 @@ function ViewData() {
                             <thead>
                                 <tr>
                                     <th>Tanggal</th><th>Nama</th><th>Kategori</th>
-                                    <th className="right">Jumlah</th><th className="center">Aksi</th>
+                                    <th className="right">Jumlah</th>
+                                    {isStaff && <th className="center">Aksi</th>}
                                 </tr>
                             </thead>
                             <tbody>
                                 {filteredExpense.length === 0 ? (
-                                    <tr><td colSpan="5" className="empty-row">
+                                    <tr><td colSpan={isStaff ? 5 : 4} className="empty-row">
                                         <div className="empty-state"><span>📭</span><p>Belum ada data</p></div>
                                     </td></tr>
                                 ) : filteredExpense.map(expense => {
@@ -327,12 +333,14 @@ function ViewData() {
                                                 </span>
                                             </td>
                                             <td className="right"><span className="amount expense">-{formatRupiah(amount || total)}</span></td>
-                                            <td className="center">
-                                                <div className="action-group">
-                                                    <button className="btn-edit"   onClick={() => handleEditExpense({ _id, date, title, amount: amount || total, category, description })}>✏️</button>
-                                                    <button className="btn-delete" onClick={() => handleDeleteClick(_id, 'expense', title || 'pengeluaran ini')}>🗑️</button>
-                                                </div>
-                                            </td>
+                                            {isStaff && (
+                                                <td className="center">
+                                                    <div className="action-group">
+                                                        <button className="btn-edit"   onClick={() => handleEditExpense({ _id, date, title, amount: amount || total, category, description })}>✏️</button>
+                                                        <button className="btn-delete" onClick={() => handleDeleteClick(_id, 'expense', title || 'pengeluaran ini')}>🗑️</button>
+                                                    </div>
+                                                </td>
+                                            )}
                                         </tr>
                                     );
                                 })}
@@ -363,8 +371,8 @@ function ViewData() {
                 </ModalOverlay>
             )}
 
-            {/* ── MODAL EDIT INCOME ── */}
-            {editingIncome && (
+            {/* ── MODAL EDIT INCOME (hanya staff) ── */}
+            {isStaff && editingIncome && (
                 <ModalOverlay onClick={e => { if (e.target === e.currentTarget) setEditingIncome(null); }}>
                     <ModalBox>
                         <div className="modal-header">
@@ -420,8 +428,8 @@ function ViewData() {
                 </ModalOverlay>
             )}
 
-            {/* ── MODAL EDIT EXPENSE ── */}
-            {editingExpense && (
+            {/* ── MODAL EDIT EXPENSE (hanya staff) ── */}
+            {isStaff && editingExpense && (
                 <ModalOverlay onClick={e => { if (e.target === e.currentTarget) setEditingExpense(null); }}>
                     <ModalBox className="narrow">
                         <div className="modal-header">
@@ -511,7 +519,6 @@ const FilterBar = styled.div`
     .export-error { width:100%; font-size:.78rem; color:#c0392b; background:#fff0f0; border:1.5px solid #fcd5d5; border-radius:8px; padding:.4rem .8rem; margin-top:.25rem; }
 `;
 
-/* ── Side-by-side wrapper ── */
 const TablesRow = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -526,7 +533,6 @@ const TablesRow = styled.div`
 const TableCard = styled.div`
     background: #fff; border-radius: 20px; box-shadow: 0px 1px 15px rgba(0,0,0,.07);
     overflow: hidden; display: flex; flex-direction: column;
-    /* tinggi maksimal dengan scroll internal */
     max-height: 560px;
 
     .card-header { display:flex; justify-content:space-between; align-items:center; padding:1rem 1.25rem; border-bottom:1.5px solid #f0e8f5; flex-shrink:0; &.income-header{border-left:4px solid var(--color-green);} &.expense-header{border-left:4px solid #e74c3c;} }

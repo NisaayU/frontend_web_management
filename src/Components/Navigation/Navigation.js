@@ -13,6 +13,8 @@ function Navigation() {
 
     if (!user || location.pathname === "/login") return null;
 
+    const ownerAllowed = ["/dashboard", "/view-data", "/manage-users"];
+
     return (
         <NavStyled collapsed={collapsed}>
             {/* TOGGLE BUTTON */}
@@ -36,7 +38,9 @@ function Navigation() {
             {/* MENU */}
             <ul className="menu-items">
                 {menuItems.map((item) => {
+                    if (user?.role === "owner" && !ownerAllowed.includes(item.path)) return null;
                     if (item.path === "/manage-users" && user?.role !== "owner") return null;
+
                     return (
                         <li key={item.id}>
                             <NavLink
@@ -211,12 +215,10 @@ const NavStyled = styled.nav`
 
     /* ── RESPONSIVE ── */
 
-    /* Tablet: sidebar agak lebih kecil */
     @media (max-width: 1024px) {
         width: ${({ collapsed }) => collapsed ? "64px" : "190px"};
     }
 
-    /* Mobile landscape: auto collapse jadi icon only */
     @media (max-width: 768px) {
         width: 64px;
         padding: 1rem .5rem;
@@ -229,7 +231,6 @@ const NavStyled = styled.nav`
         .signout-btn { justify-content: center; span { display: none; } }
     }
 
-    /* Mobile portrait: bottom navigation bar */
     @media (max-width: 480px) {
         position: fixed;
         bottom: .75rem;

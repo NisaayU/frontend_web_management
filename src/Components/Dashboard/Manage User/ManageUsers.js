@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useGlobalContext } from "../../../context/globalContext";
 import axios from "axios";
 
-const BASE_URL = "hhttps://afcaa306-8731-44cf-9818-91461b831ea0-00-b0ch5nd4x1em.sisko.replit.dev/api/v1/";
+const BASE_URL = "https://afcaa306-8731-44cf-9818-91461b831ea0-00-b0ch5nd4x1em.sisko.replit.dev/api/v1/";
 
 function ManageUsers() {
     const { user } = useGlobalContext();
