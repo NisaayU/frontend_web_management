@@ -234,7 +234,6 @@ function InputItem() {
 
                             <div className="item-actions">
                                 <button className="btn-edit" onClick={() => handleEdit(item)} title="Edit item">✏️</button>
-                                {isOwner && (
                                     <button
                                         className="btn-delete"
                                         onClick={() => handleDelete(item._id, item.name)}
@@ -242,7 +241,6 @@ function InputItem() {
                                     >
                                         🗑️
                                     </button>
-                                )}
                             </div>
                         </div>
                     ))}
