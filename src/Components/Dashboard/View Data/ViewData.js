@@ -180,29 +180,23 @@ function ViewData() {
     // ── EXPORT ──
     const [exporting, setExporting]   = useState(false);
     const [exportError, setExportError] = useState('');
-
     const exportExcel = async () => {
-        setExporting(true); setExportError('');
-        try {
-            const res = await axios.get(`${BASE_URL}export`, {
-                params: { buyer, date, product },
-                responseType: 'arraybuffer',
-            });
-            const blob = new Blob([res.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-            const url  = window.URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href  = url;
-            link.setAttribute('download', `laporan-income-${date || 'semua'}.xlsx`);
-            document.body.appendChild(link);
-            link.click();
-            link.remove();
-            window.URL.revokeObjectURL(url);
-        } catch {
-            setExportError('Gagal export. Pastikan backend berjalan.');
-        } finally {
-            setExporting(false);
-        }
-    };
+    setExporting(true);
+    setExportError('');
+    try {
+        const params = new URLSearchParams();
+        if (buyer)   params.append('buyer', buyer);
+        if (date)    params.append('date', date);
+        if (product) params.append('product', product);
+
+        window.open(`${BASE_URL}export?${params.toString()}`, '_blank');
+
+    } catch {
+        setExportError('Gagal export. Pastikan backend berjalan.');
+    } finally {
+        setExporting(false);
+    }
+};
 
     return (
         <ViewDataStyled>
